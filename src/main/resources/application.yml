@@ -1,0 +1,11 @@
+
+logging:
+  level:
+    org.springframework: ERROR
+    co.lps.mockora: DEBUG
+
+spring:
+  profiles: dev
+  url: http://localhost
+
+
