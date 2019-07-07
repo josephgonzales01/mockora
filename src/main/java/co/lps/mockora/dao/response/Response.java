@@ -1,8 +1,7 @@
 package co.lps.mockora.dao.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * co.lps.mockora.dao.response
@@ -10,8 +9,7 @@ import lombok.Setter;
  * @author : josephg
  * @since : 6/07/2019
  */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 public class Response {
     private String body;

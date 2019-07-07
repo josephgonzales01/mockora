@@ -8,4 +8,13 @@ spring:
   profiles: dev
   url: http://localhost
 
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: mockora
+      username: mongodb
+      password: mongodb#1
+
+
 
