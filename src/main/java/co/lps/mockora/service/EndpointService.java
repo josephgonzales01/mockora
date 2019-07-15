@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ServeMockService implements IServeMockService {
+public class EndpointService implements IEndpointService {
 }

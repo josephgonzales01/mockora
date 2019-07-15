@@ -1,7 +1,7 @@
 package co.lps.mockora.controller;
 
-import co.lps.mockora.service.IServeMockService;
-import co.lps.mockora.service.ISetMockService;
+import co.lps.mockora.service.IServeEndpointService;
+import co.lps.mockora.service.IEndpointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1")
 public class SetMockController {
 
-    ISetMockService setMockService;
-    IServeMockService serveMockService;
+    IEndpointService setMockService;
+    IServeEndpointService serveMockService;
 
     @Autowired
-    public SetMockController(ISetMockService setMockService, IServeMockService serveMockerService) {
+    public SetMockController(IEndpointService setMockService, IServeEndpointService serveMockerService) {
         this.setMockService = setMockService;
         this.serveMockService = serveMockerService;
     }

@@ -1,7 +1,7 @@
-package co.lps.mockora.dao.request;
+package co.lps.mockora.constants;
 
 /**
- * co.lps.mockora.dao.request
+ * co.lps.mockora.dao.endpoint
  *
  * @author : josephg
  * @since : 6/07/2019
