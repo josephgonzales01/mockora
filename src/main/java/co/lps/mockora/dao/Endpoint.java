@@ -1,7 +1,8 @@
-package co.lps.mockora.dao.endpoint;
+package co.lps.mockora.dao;
 
+import co.lps.mockora.dao.methods.Method;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,17 +12,17 @@ import java.util.List;
  * co.lps.mockora.dao.endpoint
  *
  * @author : josephg
- * @since : 15/07/2019
+ * @since : 6/07/2019
  */
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 @Document
-public class RequestProperty {
+public class Endpoint {
 
     @Id
     private String id;
-    private String name;
-    private String value;
-    private List<RequestProperty> requestProperties;
+    private String url;
+    private String organisationId;
+    private List<Method> methods;
 
 }

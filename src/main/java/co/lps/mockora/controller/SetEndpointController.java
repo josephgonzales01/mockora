@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1")
-public class SetMockController {
+public class SetEndpointController {
 
-    IEndpointService setMockService;
-    IServeEndpointService serveMockService;
+    IEndpointService setEndpointService;
+    IServeEndpointService serveEndpointService;
 
     @Autowired
-    public SetMockController(IEndpointService setMockService, IServeEndpointService serveMockerService) {
-        this.setMockService = setMockService;
-        this.serveMockService = serveMockerService;
+    public SetEndpointController(IEndpointService setEndpointService, IServeEndpointService serveEndpointService) {
+        this.setEndpointService = setEndpointService;
+        this.serveEndpointService = serveEndpointService;
     }
 
     @PostMapping("/set")
