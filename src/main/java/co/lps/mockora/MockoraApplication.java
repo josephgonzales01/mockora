@@ -6,7 +6,8 @@ import co.lps.mockora.dao.methods.Method;
 import co.lps.mockora.dao.methods.response.Response;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import java.util.Arrays;
 
 /**
@@ -17,13 +18,15 @@ import java.util.Arrays;
  */
 
 @SpringBootApplication
+@EnableConfigurationProperties
 public class MockoraApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MockoraApplication.class, args);
-        Endpoint endpoint = new Endpoint("", "", "", Arrays.asList(new Method("", new Settings(), new Response("", 200, ""))));
-        String myUrl = endpoint.getUrl();
+  public static void main(String[] args) {
+    SpringApplication.run(MockoraApplication.class, args);
+    Endpoint endpoint = new Endpoint("", "", "",
+        Arrays.asList(new Method("", new Settings(), new Response("", 200, ""))));
+    String myUrl = endpoint.getUrl();
 
-    }
+  }
 
 }

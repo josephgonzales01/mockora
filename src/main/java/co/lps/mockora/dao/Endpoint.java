@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 
 /**
@@ -19,10 +18,10 @@ import java.util.List;
 @Document
 public class Endpoint {
 
-    @Id
-    private String id;
-    private String url;
-    private String organisationId;
-    private List<Method> methods;
+  @Id
+  private String id;
+  private String url;
+  private String organisationId;
+  private List<Method> methods;
 
 }

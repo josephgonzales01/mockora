@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 
 /**
@@ -18,10 +17,10 @@ import java.util.List;
 @Document
 public class RequestProperty {
 
-    @Id
-    private String id;
-    private String name;
-    private String value;
-    private List<RequestProperty> requestProperties;
+  @Id
+  private String id;
+  private String name;
+  private String value;
+ 
 
 }
