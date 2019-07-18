@@ -2,7 +2,6 @@ package co.lps.mockora.model.dto;
 
 import java.util.List;
 import org.springframework.data.annotation.Id;
-import co.lps.mockora.model.dto.methods.MethodDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

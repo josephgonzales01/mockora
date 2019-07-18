@@ -1,7 +1,5 @@
-package co.lps.mockora.model.dao.methods;
+package co.lps.mockora.model.dao;
 
-import co.lps.mockora.model.dao.Settings;
-import co.lps.mockora.model.dao.methods.response.Response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

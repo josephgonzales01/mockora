@@ -37,11 +37,12 @@ public class MockEndpointController {
   }
 
   @PostMapping("/mock")
-  public ResponseEntity<EndpointDto> addMock(@RequestBody EndpointDto endpointRequest) {
+  public ResponseEntity<EndpointDto> addMock(@RequestBody EndpointDto dto) {
     
     logger.info("/map post request received");
+    mockEndpointService.save(dto);
 
-    return ResponseEntity.ok().body(endpointRequest);
+    return ResponseEntity.ok().body(dto);
 
   }
 

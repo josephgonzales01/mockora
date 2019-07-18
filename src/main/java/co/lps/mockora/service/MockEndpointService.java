@@ -1,6 +1,7 @@
 package co.lps.mockora.service;
 
 import org.springframework.stereotype.Service;
+import co.lps.mockora.model.dto.EndpointDto;
 
 /**
  * co.lps.mockora.service
@@ -11,4 +12,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MockEndpointService implements IMockEndpointService {
+
+  @Override
+  public void save(EndpointDto endpointRequest) {
+    // TODO Auto-generated method stub
+    
+  }
+  
 }

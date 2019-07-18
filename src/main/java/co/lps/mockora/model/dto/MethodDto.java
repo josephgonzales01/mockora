@@ -1,8 +1,6 @@
-package co.lps.mockora.model.dto.methods;
+package co.lps.mockora.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import co.lps.mockora.model.dao.Settings;
-import co.lps.mockora.model.dao.methods.response.Response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,7 @@ public class MethodDto {
 
   @JsonProperty("method")
   private String methodType;
-  private Settings settings;
-  private Response response;
+  private SettingsDto settings;
+  private ResponseDto response;
 
 }

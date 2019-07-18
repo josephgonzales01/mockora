@@ -1,6 +1,5 @@
 package co.lps.mockora.model.dao;
 
-import co.lps.mockora.model.dao.methods.Method;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
