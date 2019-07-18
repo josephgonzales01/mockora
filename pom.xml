@@ -66,21 +66,4 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <maven.profile.active>dev</maven.profile.active>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <maven.profile.active>prod</maven.profile.active>
-            </properties>
-        </profile>
-    </profiles>
 </project>

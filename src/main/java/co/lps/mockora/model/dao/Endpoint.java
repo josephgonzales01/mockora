@@ -1,6 +1,6 @@
-package co.lps.mockora.dao;
+package co.lps.mockora.model.dao;
 
-import co.lps.mockora.dao.methods.Method;
+import co.lps.mockora.model.dao.methods.Method;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 /**
- * co.lps.mockora.dao.endpoint
+ * co.lps.mockora.model.dao.endpoint
  *
  * @author : josephg
  * @since : 6/07/2019
@@ -21,7 +21,7 @@ public class Endpoint {
   @Id
   private String id;
   private String url;
-  private String organisationId;
+  private String organizationId;
   private List<Method> methods;
 
 }

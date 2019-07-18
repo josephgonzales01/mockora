@@ -1,8 +1,5 @@
 package co.lps.mockora.controller;
 
-import co.lps.mockora.service.IServeEndpointService;
-import co.lps.mockora.dao.Endpoint;
-import co.lps.mockora.service.IEndpointService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import co.lps.mockora.model.dto.EndpointDto;
+import co.lps.mockora.service.IMockEndpointService;
+import co.lps.mockora.service.IServeEndpointService;
 
 /**
  * co.lps.mockora.controller
@@ -22,22 +22,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1")
-public class MapEndpointController {
+public class MockEndpointController {
 
-  Logger logger = LoggerFactory.getLogger(MapEndpointController.class);
+  Logger logger = LoggerFactory.getLogger(MockEndpointController.class);
 
-  IEndpointService setEndpointService;
+  IMockEndpointService mockEndpointService;
   IServeEndpointService serveEndpointService;
 
   @Autowired
-  public MapEndpointController(IEndpointService setEndpointService,
+  public MockEndpointController(IMockEndpointService mockEndpointService,
       IServeEndpointService serveEndpointService) {
-    this.setEndpointService = setEndpointService;
+    this.mockEndpointService = mockEndpointService;
     this.serveEndpointService = serveEndpointService;
   }
 
-  @PostMapping("/map")
-  public ResponseEntity<Endpoint> addMock(@RequestBody Endpoint endpointRequest) {
+  @PostMapping("/mock")
+  public ResponseEntity<EndpointDto> addMock(@RequestBody EndpointDto endpointRequest) {
     
     logger.info("/map post request received");
 
@@ -45,7 +45,7 @@ public class MapEndpointController {
 
   }
 
-  @GetMapping("/map")
+  @GetMapping("/mock")
   public ResponseEntity<String> getMock() {
 
     return ResponseEntity.ok().body("Hello world 2");

@@ -1,6 +1,6 @@
 package co.lps.mockora.respository;
 
-import co.lps.mockora.dao.Endpoint;
+import co.lps.mockora.model.dao.Endpoint;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

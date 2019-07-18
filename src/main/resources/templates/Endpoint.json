@@ -5,7 +5,7 @@
     {
       "method": "GET",
       "settings": {
-        "showNull": "false",
+        "showNull": false,
         "delay": 5000
       },
       "response": {
@@ -19,7 +19,7 @@
     {
       "method": "POST",
       "settings": {
-        "showNull": "false",
+        "showNull": false,
         "delay": 5000
       },
       "response": {

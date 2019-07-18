@@ -6,5 +6,5 @@ package co.lps.mockora.service;
  * @author : josephg
  * @since : 7/07/2019
  */
-public interface IEndpointService {
+public interface IMockEndpointService {
 }
