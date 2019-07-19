@@ -18,7 +18,7 @@ public class EndpointDto {
   @Id
   private String id;
   private String url;
-  private String organizationId;
+  private String orgId;
   private List<MethodDto> methods;
 
 }
