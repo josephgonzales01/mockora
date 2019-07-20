@@ -67,7 +67,8 @@
 		</plugins>
 
 		<resources>
-		<!-- To trigger and replace the references to maven from .properties file e.g maven.active.profile -->
+			<!-- To trigger and replace the references to maven from .properties file 
+				e.g maven.active.profile -->
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>

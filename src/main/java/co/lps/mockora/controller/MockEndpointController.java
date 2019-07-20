@@ -21,7 +21,7 @@ import co.lps.mockora.service.IServeEndpointService;
  */
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping
 public class MockEndpointController {
 
   Logger logger = LoggerFactory.getLogger(MockEndpointController.class);
