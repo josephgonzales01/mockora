@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import co.lps.mockora.configuration.ApplicationProperties;
 import co.lps.mockora.model.dto.EndpointDto;
 import co.lps.mockora.service.IMockEndpointService;
 import co.lps.mockora.service.IServeEndpointService;
+import co.lps.mockora.service.UrlUtilityService;
 
 /**
  * co.lps.mockora.controller
@@ -21,24 +23,29 @@ import co.lps.mockora.service.IServeEndpointService;
  */
 
 @RestController
-@RequestMapping
+@RequestMapping(ApplicationProperties.MOCK_URL)
 public class MockEndpointController {
 
   Logger logger = LoggerFactory.getLogger(MockEndpointController.class);
 
   IMockEndpointService mockEndpointService;
   IServeEndpointService serveEndpointService;
+  UrlUtilityService urlUtilityService;
+  ApplicationProperties appProperties;
 
   @Autowired
   public MockEndpointController(IMockEndpointService mockEndpointService,
-      IServeEndpointService serveEndpointService) {
+      IServeEndpointService serveEndpointService, UrlUtilityService urlUtilityService,
+      ApplicationProperties appProperties) {
     this.mockEndpointService = mockEndpointService;
     this.serveEndpointService = serveEndpointService;
+    this.urlUtilityService = urlUtilityService;
+    this.appProperties = appProperties;
   }
 
-  @PostMapping("/mock")
+  @PostMapping("/**")
   public ResponseEntity<EndpointDto> addMock(@RequestBody EndpointDto dto) {
-    
+
     logger.info("/map post request received");
     mockEndpointService.save(dto);
 
@@ -46,7 +53,7 @@ public class MockEndpointController {
 
   }
 
-  @GetMapping("/mock")
+  @GetMapping("/**")
   public ResponseEntity<String> getMock() {
 
     return ResponseEntity.ok().body("Hello world 2");

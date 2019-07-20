@@ -24,7 +24,7 @@ import co.lps.mockora.service.UrlUtilityService;
  */
 
 @RestController
-@RequestMapping("/serve")
+@RequestMapping(ApplicationProperties.SERVE_URL)
 public class ServeEndpointController {
 
   Logger logger = LoggerFactory.getLogger(MockEndpointController.class);
@@ -52,7 +52,7 @@ public class ServeEndpointController {
     logger.info("/serve post request received");
     logger.info("requestUrl: {}", request.getRequestURL());
     logger.info("requestURI: {}", request.getRequestURI());
-    return ResponseEntity.ok().body(urlUtilityService.getOrgUrl(request.getRequestURI()));
+    return ResponseEntity.ok().body(urlUtilityService.getServeOrgUrl(request.getRequestURI()));
 
   }
 

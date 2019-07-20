@@ -8,8 +8,6 @@ import co.lps.mockora.configuration.ApplicationProperties;
 public class UrlUtilityService {
 
   private ApplicationProperties appProperties;
-
-  private static final String SERVER_URL = "/serve";
   private static final String EMTPY = "";
 
   @Autowired
@@ -18,9 +16,13 @@ public class UrlUtilityService {
   }
 
 
-  public String getOrgUrl(final String requestURI) {
-    return requestURI.replace(appProperties.getBaseUrl() + SERVER_URL, EMTPY);
+  public String getServeOrgUrl(final String requestURI) {
+    return requestURI.replace(appProperties.getBaseUrl() + ApplicationProperties.SERVE_URL, EMTPY);
 
+  }
+
+  public String getMockOrgUrl(final String requestURI) {
+    return requestURI.replace(appProperties.getBaseUrl() + ApplicationProperties.MOCK_URL, EMTPY);
   }
 
 }

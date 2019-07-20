@@ -14,10 +14,14 @@ import lombok.Getter;
 
 @Configuration
 @PropertySource("classpath:application.properties")
-@Getter
 public class ApplicationProperties {
 
+  @Getter
   @Value("${server.servlet.context-path}")
   private String baseUrl;
+  
+  public static final String SERVE_URL = "/serve";
+  public static final String MOCK_URL = "/mock";
+  
 
 }
