@@ -24,5 +24,10 @@ public class UrlUtilityService {
   public String getMockOrgUrl(final String requestURI) {
     return requestURI.replace(appProperties.getBaseUrl() + ApplicationProperties.MOCK_URL, EMTPY);
   }
+  
+
+  public String getOrg(final String uri) {
+    return uri.split("/")[0];
+  }
 
 }

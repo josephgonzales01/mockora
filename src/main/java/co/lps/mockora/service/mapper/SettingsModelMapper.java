@@ -7,8 +7,12 @@ import co.lps.mockora.model.dto.SettingsDto;
 @Service
 public class SettingsModelMapper {
 
-  public Settings maptoDao(SettingsDto dto) {
-    return new Settings(dto.isShowNull(), dto.getDelay());
-  }
+    public Settings maptoDao(SettingsDto dto) {
+        return new Settings(dto.isShowNull(), dto.getDelay());
+    }
+
+    public SettingsDto mapToDto(Settings dao) {
+        return new SettingsDto(dao.isShowNull(), dao.getDelay());
+    }
 
 }

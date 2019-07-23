@@ -1,6 +1,8 @@
 package co.lps.mockora.model.dto;
 
 import java.util.HashMap;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,10 +14,11 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ResponseDto {
 
-  private HashMap<String, Object> body;
-  private int status;
-  private HashMap<String, String> headers;
+    private HashMap<String, Object> body;
+    private int status;
+    private HashMap<String, String> headers;
 
 }
