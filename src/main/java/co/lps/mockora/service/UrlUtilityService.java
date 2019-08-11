@@ -1,33 +1,20 @@
 package co.lps.mockora.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import co.lps.mockora.constants.ApplicationURL;
 import org.springframework.stereotype.Service;
-import co.lps.mockora.configuration.ApplicationProperties;
 
 @Service
 public class UrlUtilityService {
 
-  private ApplicationProperties appProperties;
-  private static final String EMTPY = "";
 
-  @Autowired
-  public UrlUtilityService(ApplicationProperties appProperties) {
-    this.appProperties = appProperties;
-  }
+    private static final String EMTPY = "";
 
+    public String getServeUrlWithoutOrg(final String requestURI, final String orgId) {
+        return requestURI.replace(ApplicationURL.SERVE_URL + "/" + orgId, EMTPY);
 
-  public String getServeOrgUrl(final String requestURI) {
-    return requestURI.replace(appProperties.getBaseUrl() + ApplicationProperties.SERVE_URL, EMTPY);
+    }
 
-  }
-
-  public String getMockOrgUrl(final String requestURI) {
-    return requestURI.replace(appProperties.getBaseUrl() + ApplicationProperties.MOCK_URL, EMTPY);
-  }
-  
-
-  public String getOrg(final String uri) {
-    return uri.split("/")[0];
-  }
-
+    public String getMockUrlWithoutOrg(final String requestURI, final String orgId) {
+        return requestURI.replace(ApplicationURL.MOCK_URL + "/" + orgId, EMTPY);
+    }
 }

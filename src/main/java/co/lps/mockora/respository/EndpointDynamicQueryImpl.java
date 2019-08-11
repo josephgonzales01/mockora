@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EndpointDynamicQueryImpl implements EndpointDynamicQuery {
@@ -18,9 +19,9 @@ public class EndpointDynamicQueryImpl implements EndpointDynamicQuery {
 
 
     @Override
-    public List<Endpoint> query(String queryName) {
+    public List<Endpoint> query(String queryName, String queryValue) {
         Query query = new Query();
-        query.addCriteria(Criteria.where(queryName).is(""));
-        return null;
+        query.addCriteria(Criteria.where(queryName).is(queryValue));
+        return new ArrayList<>();
     }
 }

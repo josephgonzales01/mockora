@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EndpointDynamicQuery {
 
-    List<Endpoint> query(String queryName);
+    List<Endpoint> query(String queryName, String queryValue);
 }
