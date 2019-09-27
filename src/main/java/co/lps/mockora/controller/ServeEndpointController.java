@@ -33,7 +33,6 @@ public class ServeEndpointController {
 
     @Autowired
     public ServeEndpointController(MockEndpointService mockEndpointService,
-
                                    UrlUtilityService urlUtilityService) {
         this.mockEndpointService = mockEndpointService;
         this.urlUtilityService = urlUtilityService;
