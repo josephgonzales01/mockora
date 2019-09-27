@@ -1,0 +1,13 @@
+
+server:
+  port: 8080
+
+spring:
+  profiles: 
+    active: "dev"
+# Mongo DB Configuration
+  data:
+    mongodb:
+      host: localhost
+      database: "mockora"
+      port: 27017
