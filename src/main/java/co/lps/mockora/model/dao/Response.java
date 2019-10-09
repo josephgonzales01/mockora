@@ -1,6 +1,7 @@
 package co.lps.mockora.model.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,6 @@ public class Response {
 
   private HashMap<String, Object> body;
   private int status;
-  private HashMap<String, String> headers;
+  private List<Header> headers;
 
 }

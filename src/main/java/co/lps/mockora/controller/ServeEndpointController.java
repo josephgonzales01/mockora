@@ -50,7 +50,8 @@ public class ServeEndpointController {
 
     @GetMapping("/{orgId}/**")
     public ResponseEntity<String> serveGetMock(HttpServletRequest request, @PathVariable String orgId) {
-
+        logger.info("from {}",request.getRequestURI());
+      
         logger.info("/serve post request received with base url {}", urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId));
         return ResponseEntity.ok().body("helloworld");
 
