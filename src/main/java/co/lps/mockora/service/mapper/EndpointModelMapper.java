@@ -13,21 +13,27 @@ import co.lps.mockora.model.dto.EndpointDto;
 @Service
 public class EndpointModelMapper {
 
-    @Autowired
-    private MethodModelMapper methodModelMapper;
 
-    public Endpoint mapToDao(EndpointDto dto) {
+  private MethodModelMapper methodModelMapper;
 
-        List<Method> methods = dto.getMethods().stream()
-                .map(methodDto -> methodModelMapper.mapToDao(methodDto)).collect(Collectors.toList());
+  @Autowired
+  public EndpointModelMapper(MethodModelMapper methodModelMapper) {
+    this.methodModelMapper = methodModelMapper;
+  }
 
-        return new Endpoint(dto.getId(), dto.getUrl(), dto.getOrgId(), methods);
-    }
+  public Endpoint mapToDao(EndpointDto dto) {
 
-    public EndpointDto mapToDto(Endpoint dao) {
+    List<Method> methods = dto.getMethods().stream()
+        .map(methodDto -> methodModelMapper.mapToDao(methodDto)).collect(Collectors.toList());
 
-        List<MethodDto> methods = dao.getMethods().stream().map(m -> methodModelMapper.mapToDto(m)).collect(Collectors.toList());
-        return new EndpointDto(dao.getId(), dao.getUrl(), dao.getOrgId(), methods);
-    }
+    return new Endpoint(dto.getId(), dto.getUrl(), dto.getOrgId(), methods);
+  }
+
+  public EndpointDto mapToDto(Endpoint dao) {
+
+    List<MethodDto> methods = dao.getMethods().stream().map(m -> methodModelMapper.mapToDto(m))
+        .collect(Collectors.toList());
+    return new EndpointDto(dao.getId(), dao.getUrl(), dao.getOrgId(), methods);
+  }
 
 }

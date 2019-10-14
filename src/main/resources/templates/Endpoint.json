@@ -1,37 +1,40 @@
 {
-  "url": "/person",
-  "organizationId": "LPS",
-  "methods": [
-    {
-      "method": "GET",
-      "settings": {
-        "showNull": false,
-        "delay": 5000
-      },
-      "response": {
-        "body": {
-          "firstName": "John",
-          "lastName": "Doe"
-        },
-        "status": 200
-      }
-    },
-    {
-      "method": "POST",
-      "settings": {
-        "showNull": false,
-        "delay": 5000
-      },
-      "response": {
-        "body": {
-          "firstName": "John",
-          "lastName": "Doe"
-        },
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      }
-    }
-  ]
+	"url": "/person",
+	"organizationId": "LPS",
+	"methods": [
+		{
+			"method": "GET",
+			"settings": {
+				"showNull": false,
+				"delay": 5000
+			},
+			"response": {
+				"body": {
+					"firstName": "John",
+					"lastName": "Doe"
+				},
+				"status": 200
+			}
+		},
+		{
+			"method": "POST",
+			"settings": {
+				"showNull": false,
+				"delay": 5000
+			},
+			"response": {
+				"body": {
+					"firstName": "John",
+					"lastName": "Doe"
+				},
+				"status": 200,
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				]
+			}
+		}
+	]
 }

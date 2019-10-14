@@ -24,38 +24,39 @@ import java.util.Map;
 @RequestMapping(ApplicationURL.SERVE_URL)
 public class ServeEndpointController {
 
-    Logger logger = LoggerFactory.getLogger(MockEndpointController.class);
+  Logger logger = LoggerFactory.getLogger(MockEndpointController.class);
 
-    MockEndpointService mockEndpointService;
+  MockEndpointService mockEndpointService;
+  UrlUtilityService urlUtilityService;
 
+  @Autowired
+  public ServeEndpointController(MockEndpointService mockEndpointService,
+      UrlUtilityService urlUtilityService) {
+    this.mockEndpointService = mockEndpointService;
+    this.urlUtilityService = urlUtilityService;
 
-    UrlUtilityService urlUtilityService;
+  }
 
-    @Autowired
-    public ServeEndpointController(MockEndpointService mockEndpointService,
-                                   UrlUtilityService urlUtilityService) {
-        this.mockEndpointService = mockEndpointService;
-        this.urlUtilityService = urlUtilityService;
+  @PostMapping("/{orgId}/**")
+  public ResponseEntity<String> servePostMock(HttpServletRequest request,
+      @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
 
-    }
+    logger.info("{} post request received", request.getRequestURI());
+    logger.info("from {} organization", request.getRequestURI());
 
-    @PostMapping("/{orgId}/**")
-    public ResponseEntity<String> servePostMock(HttpServletRequest request, @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
+    return ResponseEntity.ok()
+        .body(urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId));
+  }
 
-        logger.info("{} post request received", request.getRequestURI());
-        logger.info("from {} organization", request.getRequestURI());
+  @GetMapping("/{orgId}/**")
+  public ResponseEntity<String> serveGetMock(HttpServletRequest request,
+      @PathVariable String orgId) {
+    logger.info("from {}", request.getRequestURI());
 
-        return ResponseEntity.ok().body(urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId));
-    }
+    logger.info("/serve post request received with base url {}",
+        urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId));
+    return ResponseEntity.ok().body("helloworld");
 
-    @GetMapping("/{orgId}/**")
-    public ResponseEntity<String> serveGetMock(HttpServletRequest request, @PathVariable String orgId) {
-        logger.info("from {}",request.getRequestURI());
-      
-        logger.info("/serve post request received with base url {}", urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId));
-        return ResponseEntity.ok().body("helloworld");
-
-    }
-
+  }
 
 }

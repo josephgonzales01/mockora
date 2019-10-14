@@ -8,19 +8,26 @@ import co.lps.mockora.model.dto.MethodDto;
 @Service
 public class MethodModelMapper {
 
-    @Autowired
-    private ResponseModelMapper responseModelMapper;
-    @Autowired
-    private SettingsModelMapper settingsModelMapper;
 
-    public Method mapToDao(MethodDto dto) {
+  private ResponseModelMapper responseModelMapper;
+  private SettingsModelMapper settingsModelMapper;
 
-        return new Method(dto.getMethodType(), settingsModelMapper.maptoDao(dto.getSettings()), responseModelMapper.mapToDao(dto.getResponse()));
-    }
+  @Autowired
+  public MethodModelMapper(ResponseModelMapper responseModelMapper,
+      SettingsModelMapper settingsModelMapper) {
 
-    public MethodDto mapToDto(Method dao) {
+    this.responseModelMapper = responseModelMapper;
+    this.settingsModelMapper = settingsModelMapper;
+  }
 
-        return new MethodDto(dao.getMethodType(), settingsModelMapper.mapToDto(dao.getSettings()), responseModelMapper.mapToDto(dao.getResponse()));
-    }
+  public Method mapToDao(MethodDto dto) {
+    return new Method(dto.getMethodType(), settingsModelMapper.maptoDao(dto.getSettings()),
+        responseModelMapper.mapToDao(dto.getResponse()));
+  }
+
+  public MethodDto mapToDto(Method dao) {
+    return new MethodDto(dao.getMethodType(), settingsModelMapper.mapToDto(dao.getSettings()),
+        responseModelMapper.mapToDto(dao.getResponse()));
+  }
 
 }

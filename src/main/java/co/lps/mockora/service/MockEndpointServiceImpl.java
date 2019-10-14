@@ -19,27 +19,32 @@ import co.lps.mockora.service.mapper.EndpointModelMapper;
 @Service
 public class MockEndpointServiceImpl implements MockEndpointService {
 
-    @Autowired
-    private EndpointModelMapper endpointModelMapper;
 
-    @Autowired
-    private EndpointRepository endpointRepository;
+  private EndpointModelMapper endpointModelMapper;
+  private EndpointRepository endpointRepository;
 
-    @Override
-    public void save(EndpointDto dto) {
+  @Autowired
+  public MockEndpointServiceImpl(EndpointModelMapper endpointModelMapper,
+      EndpointRepository endpointRepository) {
+    this.endpointModelMapper = endpointModelMapper;
+    this.endpointRepository = endpointRepository;
+  }
 
-        Endpoint endpoint = endpointModelMapper.mapToDao(dto);
-        endpointRepository.save(endpoint);
+  @Override
+  public void save(EndpointDto dto) {
 
-    }
+    Endpoint endpoint = endpointModelMapper.mapToDao(dto);
+    endpointRepository.save(endpoint);
 
-    @Override
-    public List<Endpoint> findByOrgIdAndUrl(String orgId, String url) {
-        return endpointRepository.findByOrgIdAndUrl(orgId, url);
-    }
+  }
 
-    public List<Endpoint> findByOrgId(String orgId) {
-        return endpointRepository.query("organizationId", orgId);
-    }
+  @Override
+  public List<Endpoint> findByOrgIdAndUrl(String orgId, String url) {
+    return endpointRepository.findByOrgIdAndUrl(orgId, url);
+  }
+
+  public List<Endpoint> findByOrgId(String orgId) {
+    return endpointRepository.query("organizationId", orgId);
+  }
 
 }

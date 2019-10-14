@@ -7,8 +7,13 @@ import co.lps.mockora.model.dto.ResponseDto;
 
 @Service
 public class ResponseModelMapper {
-  @Autowired
+
   private HeaderModelMapper headerModelMapper;
+
+  @Autowired
+  public ResponseModelMapper(HeaderModelMapper headerModelMapper) {
+    this.headerModelMapper = headerModelMapper;
+  }
 
   public Response mapToDao(ResponseDto dto) {
     return new Response(dto.getBody(), dto.getStatus(),

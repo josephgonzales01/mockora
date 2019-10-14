@@ -1,19 +1,20 @@
 package co.lps.mockora.service;
 
-import co.lps.mockora.constants.ApplicationURL;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import co.lps.mockora.constants.ApplicationURL;
 
 @Service
 public class UrlUtilityService {
-
-
   private static final String EMTPY = "";
-  @Autowired
   private Environment env;
+
+  @Autowired
+  public UrlUtilityService(Environment env) {
+    this.env = env;
+  }
 
   public String getHostAndPort() {
     InetAddress address;
