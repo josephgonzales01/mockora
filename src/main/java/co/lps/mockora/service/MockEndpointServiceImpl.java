@@ -43,8 +43,8 @@ public class MockEndpointServiceImpl implements MockEndpointService {
     return endpointRepository.findByOrgIdAndUrl(orgId, url);
   }
 
+  @Override
   public List<Endpoint> findByOrgId(String orgId) {
-    return endpointRepository.query("organizationId", orgId);
+    return endpointRepository.findByOrgId(orgId);
   }
-
 }

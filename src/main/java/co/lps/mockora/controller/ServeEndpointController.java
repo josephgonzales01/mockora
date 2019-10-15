@@ -24,7 +24,7 @@ import java.util.Map;
 @RequestMapping(ApplicationURL.SERVE_URL)
 public class ServeEndpointController {
 
-  Logger logger = LoggerFactory.getLogger(MockEndpointController.class);
+  Logger logger = LoggerFactory.getLogger(ServeEndpointController.class);
 
   MockEndpointService mockEndpointService;
   UrlUtilityService urlUtilityService;
@@ -38,7 +38,7 @@ public class ServeEndpointController {
   }
 
   @PostMapping("/{orgId}/**")
-  public ResponseEntity<String> servePostMock(HttpServletRequest request,
+  public ResponseEntity<String> servePostEndpoint(HttpServletRequest request,
       @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
 
     logger.info("{} post request received", request.getRequestURI());
@@ -49,7 +49,7 @@ public class ServeEndpointController {
   }
 
   @GetMapping("/{orgId}/**")
-  public ResponseEntity<String> serveGetMock(HttpServletRequest request,
+  public ResponseEntity<String> serveGetEndpoint(HttpServletRequest request,
       @PathVariable String orgId) {
     logger.info("from {}", request.getRequestURI());
 

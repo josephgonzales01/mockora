@@ -13,8 +13,11 @@ import java.util.List;
  * @since : 15/07/2019
  */
 @Repository
-public interface EndpointRepository extends MongoRepository<Endpoint, String>, EndpointDynamicQuery {
+public interface EndpointRepository
+    extends MongoRepository<Endpoint, String>, EndpointDynamicQuery {
 
-    List<Endpoint> findByOrgIdAndUrl(String orgId, String url);
+  List<Endpoint> findByOrgIdAndUrl(String orgId, String url);
+
+  List<Endpoint> findByOrgId(String orgId);
 
 }

@@ -1,5 +1,7 @@
 package co.lps.mockora.service;
 
+import co.lps.mockora.model.dto.ResponseDto;
+
 /**
  * co.lps.mockora.service
  *
@@ -7,4 +9,6 @@ package co.lps.mockora.service;
  * @since : 7/07/2019
  */
 public interface ServeEndpointService {
+
+  ResponseDto endpointGetResponse(String orgId, String url);
 }
