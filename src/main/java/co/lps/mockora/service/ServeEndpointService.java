@@ -10,15 +10,15 @@ import co.lps.mockora.model.dto.ResponseDto;
  */
 public interface ServeEndpointService {
 
-  ResponseDto endpointGetResponse(String orgId, String url);
+  ResponseDto extractGetResponse(String orgId, String url);
 
-  ResponseDto endpointPostResponse(String orgId, String url);
+  ResponseDto extractPostResponse(String orgId, String url);
 
-  ResponseDto endpointPutResponse(String orgId, String url);
+  ResponseDto extractPutResponse(String orgId, String url);
 
-  ResponseDto endpointPatchResponse(String orgId, String url);
+  ResponseDto extractPatchResponse(String orgId, String url);
 
-  ResponseDto endpointDeleteResponse(String orgId, String url);
+  ResponseDto extractDeleteResponse(String orgId, String url);
 
 
 }

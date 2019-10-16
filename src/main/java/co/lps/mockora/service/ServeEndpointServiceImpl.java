@@ -38,33 +38,33 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
   }
 
   @Override
-  public ResponseDto endpointGetResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.GET.name());
+  public ResponseDto extractGetResponse(String orgId, String url) {
+    return extractMethodResponse(orgId, url, HttpMethod.GET);
   }
 
   @Override
-  public ResponseDto endpointPostResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.POST.name());
+  public ResponseDto extractPostResponse(String orgId, String url) {
+    return extractMethodResponse(orgId, url, HttpMethod.POST);
   }
 
   @Override
-  public ResponseDto endpointPutResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.PUT.name());
+  public ResponseDto extractPutResponse(String orgId, String url) {
+    return extractMethodResponse(orgId, url, HttpMethod.PUT);
   }
 
   @Override
-  public ResponseDto endpointPatchResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.PATCH.name());
+  public ResponseDto extractPatchResponse(String orgId, String url) {
+    return extractMethodResponse(orgId, url, HttpMethod.PATCH);
   }
 
   @Override
-  public ResponseDto endpointDeleteResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.DELETE.name());
+  public ResponseDto extractDeleteResponse(String orgId, String url) {
+    return extractMethodResponse(orgId, url, HttpMethod.DELETE);
   }
 
 
   private ResponseDto extractMethodResponse(final String orgId, final String url,
-      final String methodType) {
+      final HttpMethod methodType) {
     List<Endpoint> endpointList = endpointRepository.findByOrgIdAndUrl(orgId, url);
 
     // extract endpoint
@@ -78,7 +78,7 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
 
     // extract endpoint method
     Optional<MethodDto> method = endpoint.get().getMethods().stream()
-        .filter(m -> m.getMethodType().equals(methodType)).findFirst();
+        .filter(m -> m.getMethodType().equals(methodType.name())).findFirst();
     if (!method.isPresent()) {
       String errMsg = "Request Method not supported";
       log.error(errMsg);

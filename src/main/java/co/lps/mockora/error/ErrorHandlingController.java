@@ -1,4 +1,4 @@
-package co.lps.mockora.controller;
+package co.lps.mockora.error;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import co.lps.mockora.model.exception.MockoraException;
 @ControllerAdvice
 public class ErrorHandlingController {
 
+ 
   @ExceptionHandler({MockoraException.class, MethodArgumentNotValidException.class})
   public ResponseEntity<CommonResponseDto> handleError(Exception ex, WebRequest request) {
     List<ErrorDto> errors = new ArrayList<ErrorDto>();

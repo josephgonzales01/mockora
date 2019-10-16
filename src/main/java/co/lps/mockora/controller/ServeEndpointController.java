@@ -56,7 +56,7 @@ public class ServeEndpointController {
     orgId = orgId.toLowerCase();
 
     log.debug("[SERVE:POST] for url {}{}", orgId, url);
-    return buildResponse(serveEndpointService.endpointPostResponse(orgId, url));
+    return buildResponse(serveEndpointService.extractPostResponse(orgId, url));
 
   }
 
@@ -69,7 +69,7 @@ public class ServeEndpointController {
 
     log.debug("[SERVE:GET] for url {}{}", orgId, url);
 
-    return buildResponse(serveEndpointService.endpointGetResponse(orgId, url));
+    return buildResponse(serveEndpointService.extractGetResponse(orgId, url));
 
   }
 
@@ -82,7 +82,7 @@ public class ServeEndpointController {
 
     log.debug("[SERVE:PUT] for url {}{}", orgId, url);
 
-    return buildResponse(serveEndpointService.endpointPutResponse(orgId, url));
+    return buildResponse(serveEndpointService.extractPutResponse(orgId, url));
 
   }
 
@@ -95,7 +95,7 @@ public class ServeEndpointController {
 
     log.debug("[SERVE:PATCH] for url {}{}", orgId, url);
 
-    return buildResponse(serveEndpointService.endpointPatchResponse(orgId, url));
+    return buildResponse(serveEndpointService.extractPatchResponse(orgId, url));
 
   }
 
@@ -108,7 +108,7 @@ public class ServeEndpointController {
 
     log.debug("[SERVE:DELETE] for url {}{}", orgId, url);
 
-    return buildResponse(serveEndpointService.endpointDeleteResponse(orgId, url));
+    return buildResponse(serveEndpointService.extractDeleteResponse(orgId, url));
 
   }
 
