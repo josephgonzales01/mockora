@@ -2,12 +2,17 @@ package co.lps.mockora.model.exception;
 
 import org.springframework.http.HttpStatus;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @AllArgsConstructor
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class MockoraException extends RuntimeException {
-  private String message;
-  private HttpStatus status;
+  private final String message;
+  private final HttpStatus status;
 
+  public MockoraException(HttpStatus status) {
+    this("", status);
+  }
 }

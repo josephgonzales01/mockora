@@ -11,4 +11,14 @@ import co.lps.mockora.model.dto.ResponseDto;
 public interface ServeEndpointService {
 
   ResponseDto endpointGetResponse(String orgId, String url);
+
+  ResponseDto endpointPostResponse(String orgId, String url);
+
+  ResponseDto endpointPutResponse(String orgId, String url);
+
+  ResponseDto endpointPatchResponse(String orgId, String url);
+
+  ResponseDto endpointDeleteResponse(String orgId, String url);
+
+
 }
