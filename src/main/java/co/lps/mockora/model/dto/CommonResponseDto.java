@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
-public class CommonMessageDto {
+public class CommonResponseDto {
 
   private String message;
   private String description;

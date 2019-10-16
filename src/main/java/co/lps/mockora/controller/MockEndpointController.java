@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import co.lps.mockora.constants.ApplicationURL;
-import co.lps.mockora.model.dto.CommonMessageDto;
+import co.lps.mockora.model.dto.CommonResponseDto;
 import co.lps.mockora.model.dto.EndpointDto;
 import co.lps.mockora.service.MockEndpointService;
 import co.lps.mockora.service.ServeEndpointService;
@@ -43,13 +43,13 @@ public class MockEndpointController {
   }
 
   @PostMapping("/**")
-  public ResponseEntity<CommonMessageDto> addMock(@RequestBody EndpointDto dto) {
+  public ResponseEntity<CommonResponseDto> addMock(@RequestBody EndpointDto dto) {
 
     logger.info("/mock post request received");
     mockEndpointService.save(dto);
 
     return ResponseEntity.ok()
-        .body(new CommonMessageDto(
+        .body(new CommonResponseDto(
             "Successfully Created endpoint", String.format("%s%s%s",
                 urlUtilityService.getHostAndPort(), ApplicationURL.SERVE_URL, dto.getUrl()),
             HttpStatus.CREATED.value()));
