@@ -76,7 +76,7 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
     Optional<MethodDto> method = endpoint.get().getMethods().stream()
         .filter(m -> m.getMethodType().equals(methodType)).findFirst();
     if (!method.isPresent()) {
-      throw new MockoraException(HttpStatus.METHOD_NOT_ALLOWED);
+      throw new MockoraException("Request Method not supported", HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     // extract method response

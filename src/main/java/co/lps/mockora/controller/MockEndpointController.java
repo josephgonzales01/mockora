@@ -47,7 +47,7 @@ public class MockEndpointController {
 
     logger.info("/mock post request received");
     mockEndpointService.save(dto);
-
+    
     return ResponseEntity.ok()
         .body(new CommonResponseDto(
             "Successfully Created endpoint", String.format("%s%s%s",

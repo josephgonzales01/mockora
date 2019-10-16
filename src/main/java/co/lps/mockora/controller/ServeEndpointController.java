@@ -47,8 +47,9 @@ public class ServeEndpointController {
       @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
 
     String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
+    orgId = orgId.toLowerCase();
 
-    logger.info("/serve POST request received with base url {}", url);
+    logger.info("[SERVE:POST] for url {}{}", orgId, url);
     ResponseDto response = serveEndpointService.endpointPostResponse(orgId, url);
     return ResponseEntity.status(response.getStatus()).body(response.getBody());
   }
@@ -58,11 +59,47 @@ public class ServeEndpointController {
       @PathVariable String orgId) {
 
     String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
+    orgId = orgId.toLowerCase();
 
-    logger.info("/serve GET request received with base url {}", url);
+    logger.info("[SERVE:GET] for url {}{}", orgId, url);
     ResponseDto response = serveEndpointService.endpointGetResponse(orgId, url);
     return ResponseEntity.status(response.getStatus()).body(response.getBody());
+  }
 
+  @PutMapping("/{orgId}/**")
+  public ResponseEntity<HashMap<String, Object>> servePutEndpoint(HttpServletRequest request,
+      @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
+
+    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
+    orgId = orgId.toLowerCase();
+
+    logger.info("[SERVE:PUT] for url {}{}", orgId, url);
+    ResponseDto response = serveEndpointService.endpointPutResponse(orgId, url);
+    return ResponseEntity.status(response.getStatus()).body(response.getBody());
+  }
+
+  @PatchMapping("/{orgId}/**")
+  public ResponseEntity<HashMap<String, Object>> servePatchEndpoint(HttpServletRequest request,
+      @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
+
+    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
+    orgId = orgId.toLowerCase();
+
+    logger.info("[SERVE:PATCH] for url {}{}", orgId, url);
+    ResponseDto response = serveEndpointService.endpointPatchResponse(orgId, url);
+    return ResponseEntity.status(response.getStatus()).body(response.getBody());
+  }
+
+  @DeleteMapping("/{orgId}/**")
+  public ResponseEntity<HashMap<String, Object>> serveDeleteEndpoint(HttpServletRequest request,
+      @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
+
+    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
+    orgId = orgId.toLowerCase();
+
+    logger.info("[SERVE:DELETE] for url {}{}", orgId, url);
+    ResponseDto response = serveEndpointService.endpointDeleteResponse(orgId, url);
+    return ResponseEntity.status(response.getStatus()).body(response.getBody());
   }
 
 }
