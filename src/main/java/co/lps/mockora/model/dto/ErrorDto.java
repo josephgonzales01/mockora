@@ -5,9 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class HeaderDto {
+public class ErrorDto {
+  private String error;
+  private String details;
 
-  private String key;
-  private String value;
- 
 }

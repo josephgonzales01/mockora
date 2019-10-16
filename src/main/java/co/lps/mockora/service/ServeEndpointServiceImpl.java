@@ -13,6 +13,7 @@ import co.lps.mockora.model.dto.ResponseDto;
 import co.lps.mockora.model.exception.MockoraException;
 import co.lps.mockora.respository.EndpointRepository;
 import co.lps.mockora.service.mapper.EndpointModelMapper;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * co.lps.mockora.service
@@ -22,6 +23,7 @@ import co.lps.mockora.service.mapper.EndpointModelMapper;
  */
 
 @Service
+@Slf4j
 public class ServeEndpointServiceImpl implements ServeEndpointService {
 
   private EndpointRepository endpointRepository;
@@ -69,14 +71,18 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
     Optional<EndpointDto> endpoint =
         endpointList.stream().findFirst().map(endpointModelMapper::mapToDto);
     if (!endpoint.isPresent()) {
-      throw new MockoraException(HttpStatus.NOT_FOUND);
+      String errMsg = String.format("No mock endpoint for %s%s found", orgId, url);
+      log.error(errMsg);
+      throw new MockoraException(errMsg, HttpStatus.NOT_FOUND);
     }
 
     // extract endpoint method
     Optional<MethodDto> method = endpoint.get().getMethods().stream()
         .filter(m -> m.getMethodType().equals(methodType)).findFirst();
     if (!method.isPresent()) {
-      throw new MockoraException("Request Method not supported", HttpStatus.METHOD_NOT_ALLOWED);
+      String errMsg = "Request Method not supported";
+      log.error(errMsg);
+      throw new MockoraException(errMsg, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     // extract method response
