@@ -11,3 +11,4 @@ spring:
       host: 192.168.3.158
       database: "mockora"
       port: 27017
+

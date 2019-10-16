@@ -11,11 +11,14 @@ import lombok.NoArgsConstructor;
  * @since : 16/07/2019
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class SettingsDto {
-  
+
   private boolean showNull;
   private int delay;
-  
+
+  public SettingsDto() {
+    this(false, 1000);
+  }
+
 }

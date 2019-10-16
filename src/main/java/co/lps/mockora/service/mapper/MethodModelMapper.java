@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.lps.mockora.model.dao.Method;
 import co.lps.mockora.model.dto.MethodDto;
+import co.lps.mockora.model.dto.SettingsDto;
 
 @Service
 public class MethodModelMapper {
@@ -21,7 +22,7 @@ public class MethodModelMapper {
   }
 
   public Method mapToDao(MethodDto dto) {
-    return new Method(dto.getMethodType(), settingsModelMapper.maptoDao(dto.getSettings()),
+    return new Method(dto.getMethodType(), settingsModelMapper.maptoDao(dto.getSettings() == null ? new SettingsDto() : dto.getSettings()),
         responseModelMapper.mapToDao(dto.getResponse()));
   }
 
