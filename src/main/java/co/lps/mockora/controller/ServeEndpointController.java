@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import co.lps.mockora.constants.ApplicationURL;
@@ -50,8 +51,8 @@ public class ServeEndpointController {
     orgId = orgId.toLowerCase();
 
     logger.info("[SERVE:POST] for url {}{}", orgId, url);
-    ResponseDto response = serveEndpointService.endpointPostResponse(orgId, url);
-    return ResponseEntity.status(response.getStatus()).body(response.getBody());
+    return buildResponse(serveEndpointService.endpointPostResponse(orgId, url));
+
   }
 
   @GetMapping("/{orgId}/**")
@@ -62,8 +63,9 @@ public class ServeEndpointController {
     orgId = orgId.toLowerCase();
 
     logger.info("[SERVE:GET] for url {}{}", orgId, url);
-    ResponseDto response = serveEndpointService.endpointGetResponse(orgId, url);
-    return ResponseEntity.status(response.getStatus()).body(response.getBody());
+ 
+    return buildResponse(serveEndpointService.endpointGetResponse(orgId, url));
+
   }
 
   @PutMapping("/{orgId}/**")
@@ -74,8 +76,9 @@ public class ServeEndpointController {
     orgId = orgId.toLowerCase();
 
     logger.info("[SERVE:PUT] for url {}{}", orgId, url);
-    ResponseDto response = serveEndpointService.endpointPutResponse(orgId, url);
-    return ResponseEntity.status(response.getStatus()).body(response.getBody());
+
+    return buildResponse(serveEndpointService.endpointPutResponse(orgId, url));
+
   }
 
   @PatchMapping("/{orgId}/**")
@@ -86,8 +89,9 @@ public class ServeEndpointController {
     orgId = orgId.toLowerCase();
 
     logger.info("[SERVE:PATCH] for url {}{}", orgId, url);
-    ResponseDto response = serveEndpointService.endpointPatchResponse(orgId, url);
-    return ResponseEntity.status(response.getStatus()).body(response.getBody());
+
+    return buildResponse(serveEndpointService.endpointPatchResponse(orgId, url));
+
   }
 
   @DeleteMapping("/{orgId}/**")
@@ -98,8 +102,18 @@ public class ServeEndpointController {
     orgId = orgId.toLowerCase();
 
     logger.info("[SERVE:DELETE] for url {}{}", orgId, url);
-    ResponseDto response = serveEndpointService.endpointDeleteResponse(orgId, url);
-    return ResponseEntity.status(response.getStatus()).body(response.getBody());
+
+    return buildResponse(serveEndpointService.endpointDeleteResponse(orgId, url));
+
+  }
+
+
+  private ResponseEntity<HashMap<String, Object>> buildResponse(final ResponseDto response) {
+
+    HttpHeaders headers = new HttpHeaders();
+    response.getHeaders().forEach(h -> headers.add(h.getKey(), h.getValue()));
+
+    return ResponseEntity.status(response.getStatus()).headers(headers).body(response.getBody());
   }
 
 }
