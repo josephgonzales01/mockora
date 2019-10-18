@@ -1,6 +1,5 @@
 package co.lps.mockora.service.mapper;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

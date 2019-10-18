@@ -1,4 +1,4 @@
-package co.lps.mockora.model.exception;
+package co.lps.mockora.error;
 
 import org.springframework.http.HttpStatus;
 import lombok.AllArgsConstructor;
