@@ -2,6 +2,7 @@ package co.lps.mockora.model.dto;
 
 import java.util.List;
 import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -24,20 +25,25 @@ public class EndpointDto {
 
   @Id
   private String id;
-
-  private String url;
-
-  @JsonProperty("organizationId")
+  @JsonIgnore
+  private String resourceId;
+  @JsonIgnore
   private String orgId;
+
   private List<MethodDto> methods;
 
 
-  public String getUrl() {
-    return UrlUtilityService.fixEndpointUrl(url);
-  }
-
   public String getOrgId() {
     return orgId.toLowerCase();
+  }
+
+  public String getResourceId() {
+    return resourceId.toLowerCase();
+  }
+
+  public void setUrl(String orgId, String resourceId) {
+    this.orgId = orgId;
+    this.resourceId = resourceId;
   }
 
 

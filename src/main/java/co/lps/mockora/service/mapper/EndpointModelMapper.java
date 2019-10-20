@@ -26,14 +26,14 @@ public class EndpointModelMapper {
     List<Method> methods =
         dto.getMethods().stream().map(methodModelMapper::mapToDao).collect(Collectors.toList());
 
-    return new Endpoint(dto.getId(), dto.getUrl(), dto.getOrgId(), methods);
+    return new Endpoint(dto.getId(), dto.getResourceId(), dto.getOrgId(), methods);
   }
 
   public EndpointDto mapToDto(Endpoint dao) {
 
     List<MethodDto> methods =
         dao.getMethods().stream().map(methodModelMapper::mapToDto).collect(Collectors.toList());
-    return new EndpointDto(dao.getId(), dao.getUrl(), dao.getOrgId(), methods);
+    return new EndpointDto(dao.getId(), dao.getResourceId(), dao.getOrgId(), methods);
   }
 
 }

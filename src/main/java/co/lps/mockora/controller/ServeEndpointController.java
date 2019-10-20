@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,68 +52,54 @@ public class ServeEndpointController {
 
   }
 
-  @PostMapping("/{orgId}/**")
+  @PostMapping(value = "/{orgId}/{resourceId}/**", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<HashMap<String, Object>> servePostEndpoint(HttpServletRequest request,
-      @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
+      @PathVariable String orgId, @PathVariable String resourceId, @RequestBody Map<Object, Object> body) {
 
-    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
     orgId = orgId.toLowerCase();
-
-    log.debug("[SERVE:POST] for url {}{}", orgId, url);
-    return buildResponse(serveEndpointService.extractPostResponse(orgId, url));
+    log.debug("[SERVE:POST] for url {}{}", orgId, resourceId);
+    return buildResponse(serveEndpointService.extractPostResponse(orgId, resourceId));
 
   }
 
-  @GetMapping("/{orgId}/**")
+  @GetMapping(value = "/{orgId}/{resourceId}/**", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<HashMap<String, Object>> serveGetEndpoint(HttpServletRequest request,
-      @PathVariable String orgId) {
+      @PathVariable String orgId, @PathVariable String resourceId) {
 
-    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
     orgId = orgId.toLowerCase();
-
-    log.debug("[SERVE:GET] for url {}{}", orgId, url);
-
-    return buildResponse(serveEndpointService.extractGetResponse(orgId, url));
+    log.debug("[SERVE:GET] for url {}{}", orgId, resourceId);
+    return buildResponse(serveEndpointService.extractGetResponse(orgId, resourceId));
 
   }
 
-  @PutMapping("/{orgId}/**")
+  @PutMapping(value = "/{orgId}/{resourceId}/**", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<HashMap<String, Object>> servePutEndpoint(HttpServletRequest request,
-      @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
+      @PathVariable String orgId, @PathVariable String resourceId, @RequestBody Map<Object, Object> body) {
 
-    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
     orgId = orgId.toLowerCase();
+    log.debug("[SERVE:PUT] for url {}{}", orgId, resourceId);
 
-    log.debug("[SERVE:PUT] for url {}{}", orgId, url);
-
-    return buildResponse(serveEndpointService.extractPutResponse(orgId, url));
-
+    return buildResponse(serveEndpointService.extractPutResponse(orgId, resourceId));
   }
 
-  @PatchMapping("/{orgId}/**")
+  @PatchMapping(value = "/{orgId}/{resourceId}/**", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<HashMap<String, Object>> servePatchEndpoint(HttpServletRequest request,
-      @PathVariable String orgId, @RequestBody Map<Object, Object> body) {
+      @PathVariable String orgId, @PathVariable String resourceId, @RequestBody Map<Object, Object> body) {
 
-    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
     orgId = orgId.toLowerCase();
+    log.debug("[SERVE:PATCH] for url {}{}", orgId, resourceId);
 
-    log.debug("[SERVE:PATCH] for url {}{}", orgId, url);
-
-    return buildResponse(serveEndpointService.extractPatchResponse(orgId, url));
-
+    return buildResponse(serveEndpointService.extractPatchResponse(orgId, resourceId));
   }
 
-  @DeleteMapping("/{orgId}/**")
+  @DeleteMapping(value = "/{orgId}/{resourceId}/**", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<HashMap<String, Object>> serveDeleteEndpoint(HttpServletRequest request,
-      @PathVariable String orgId) {
+      @PathVariable String orgId, @PathVariable String resourceId) {
 
-    String url = urlUtilityService.getServeUrlWithoutOrg(request.getRequestURI(), orgId);
     orgId = orgId.toLowerCase();
+    log.debug("[SERVE:DELETE] for url {}{}", orgId, resourceId);
 
-    log.debug("[SERVE:DELETE] for url {}{}", orgId, url);
-
-    return buildResponse(serveEndpointService.extractDeleteResponse(orgId, url));
-
+    return buildResponse(serveEndpointService.extractDeleteResponse(orgId, resourceId));
   }
 
 

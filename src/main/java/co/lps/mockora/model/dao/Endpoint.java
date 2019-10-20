@@ -19,7 +19,7 @@ public class Endpoint {
 
   @Id
   private String id;
-  private String url;
+  private String resourceId;
   private String orgId;
   private List<Method> methods;
 
