@@ -53,9 +53,9 @@ public class MockEndpointController {
       @PathVariable String orgId, @PathVariable String resourceId, @RequestBody EndpointDto dto)
       throws URISyntaxException {
     dto.setUrl(orgId, resourceId);
-    log.debug("[MOCK:POST] for url {}{}", dto.getOrgId(), dto.getResourceId());
+    log.debug("[MOCK:POST] for url {}/{}", dto.getOrgId(), dto.getResourceId());
     mockEndpointService.save(dto);
-    String createdUri = String.format("%s%s/%s%s", urlUtilityService.getHostAndPort(),
+    String createdUri = String.format("%s%s/%s/%s", urlUtilityService.getHostAndPort(),
         ApplicationURL.SERVE_URL, dto.getOrgId(), dto.getResourceId());
 
     return ResponseEntity.created(new URI(createdUri))

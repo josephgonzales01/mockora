@@ -57,7 +57,7 @@ public class ServeEndpointController {
       @PathVariable String orgId, @PathVariable String resourceId, @RequestBody Map<Object, Object> body) {
 
     orgId = orgId.toLowerCase();
-    log.debug("[SERVE:POST] for url {}{}", orgId, resourceId);
+    log.debug("[SERVE:POST] for url {}/{}", orgId, resourceId);
     return buildResponse(serveEndpointService.extractPostResponse(orgId, resourceId));
 
   }
@@ -67,7 +67,7 @@ public class ServeEndpointController {
       @PathVariable String orgId, @PathVariable String resourceId) {
 
     orgId = orgId.toLowerCase();
-    log.debug("[SERVE:GET] for url {}{}", orgId, resourceId);
+    log.debug("[SERVE:GET] for url {}/{}", orgId, resourceId);
     return buildResponse(serveEndpointService.extractGetResponse(orgId, resourceId));
 
   }

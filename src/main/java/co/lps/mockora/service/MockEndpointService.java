@@ -15,7 +15,7 @@ public interface MockEndpointService {
 
     void save(EndpointDto endpointRequest);
 
-    List<Endpoint> findByOrgIdAndUrl(String orgId, String url);
+    List<Endpoint> findByOrgIdAndResourceId(String orgId, String resourceId);
 
     List<Endpoint> findByOrgId(String orgId);
 }

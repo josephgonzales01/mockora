@@ -38,40 +38,40 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
   }
 
   @Override
-  public ResponseDto extractGetResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.GET);
+  public ResponseDto extractGetResponse(String orgId, String resourceId) {
+    return extractMethodResponse(orgId, resourceId, HttpMethod.GET);
   }
 
   @Override
-  public ResponseDto extractPostResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.POST);
+  public ResponseDto extractPostResponse(String orgId, String resourceId) {
+    return extractMethodResponse(orgId, resourceId, HttpMethod.POST);
   }
 
   @Override
-  public ResponseDto extractPutResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.PUT);
+  public ResponseDto extractPutResponse(String orgId, String resourceId) {
+    return extractMethodResponse(orgId, resourceId, HttpMethod.PUT);
   }
 
   @Override
-  public ResponseDto extractPatchResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.PATCH);
+  public ResponseDto extractPatchResponse(String orgId, String resourceId) {
+    return extractMethodResponse(orgId, resourceId, HttpMethod.PATCH);
   }
 
   @Override
-  public ResponseDto extractDeleteResponse(String orgId, String url) {
-    return extractMethodResponse(orgId, url, HttpMethod.DELETE);
+  public ResponseDto extractDeleteResponse(String orgId, String resourceId) {
+    return extractMethodResponse(orgId, resourceId, HttpMethod.DELETE);
   }
 
 
-  private ResponseDto extractMethodResponse(final String orgId, final String url,
+  private ResponseDto extractMethodResponse(final String orgId, final String resourceId,
       final HttpMethod methodType) {
-    List<Endpoint> endpointList = endpointRepository.findByOrgIdAndUrl(orgId, url);
+    List<Endpoint> endpointList = endpointRepository.findByOrgIdAndResourceId(orgId, resourceId);
 
     // extract endpoint
     Optional<EndpointDto> endpoint =
         endpointList.stream().findFirst().map(endpointModelMapper::mapToDto);
     if (!endpoint.isPresent()) {
-      String errMsg = String.format("No mock endpoint for %s%s found", orgId, url);
+      String errMsg = String.format("No mock endpoint for %s%s found", orgId, resourceId);
       log.error(errMsg);
       throw new MockoraException(errMsg, HttpStatus.NOT_FOUND);
     }
