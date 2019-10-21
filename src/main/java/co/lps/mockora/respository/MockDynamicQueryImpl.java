@@ -1,25 +1,24 @@
 package co.lps.mockora.respository;
 
-import co.lps.mockora.model.dao.Endpoint;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import co.lps.mockora.model.dao.Mock;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class EndpointDynamicQueryImpl implements EndpointDynamicQuery {
+public class MockDynamicQueryImpl implements MockDynamicQuery {
     private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public EndpointDynamicQueryImpl(MongoTemplate mongoTemplate) {
+    public MockDynamicQueryImpl(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
 
     @Override
-    public List<Endpoint> query(String queryName, String queryValue) {
+    public List<Mock> query(String queryName, String queryValue) {
         Query query = new Query();
         query.addCriteria(Criteria.where(queryName).is(queryValue));
         return new ArrayList<>();

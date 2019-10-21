@@ -1,9 +1,8 @@
 package co.lps.mockora.service;
 
-import co.lps.mockora.model.dao.Endpoint;
-import co.lps.mockora.model.dto.EndpointDto;
-
 import java.util.List;
+import co.lps.mockora.model.dao.Mock;
+import co.lps.mockora.model.dto.MockDto;
 
 /**
  * co.lps.mockora.service
@@ -13,9 +12,9 @@ import java.util.List;
  */
 public interface MockEndpointService {
 
-    void save(EndpointDto endpointRequest);
+  void save(MockDto dto);
 
-    List<Endpoint> findByOrgIdAndResourceId(String orgId, String resourceId);
+  List<Mock> findByOrgIdAndResourceId(String orgId, String resourceId);
 
-    List<Endpoint> findByOrgId(String orgId);
+  List<Mock> findByOrgId(String orgId);
 }

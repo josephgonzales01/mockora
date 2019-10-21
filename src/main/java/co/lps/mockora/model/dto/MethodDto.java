@@ -19,4 +19,10 @@ public class MethodDto {
     methodType = method.toUpperCase();
   }
 
+  public SettingsDto getSettings() {
+    if (settings == null)
+      return new SettingsDto();
+    return settings;
+  }
+
 }

@@ -7,12 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import co.lps.mockora.constants.HttpMethod;
 import co.lps.mockora.error.MockoraException;
-import co.lps.mockora.model.dao.Endpoint;
-import co.lps.mockora.model.dto.EndpointDto;
+import co.lps.mockora.model.dao.Mock;
 import co.lps.mockora.model.dto.MethodDto;
+import co.lps.mockora.model.dto.MockDto;
 import co.lps.mockora.model.dto.ResponseDto;
-import co.lps.mockora.respository.EndpointRepository;
-import co.lps.mockora.service.mapper.EndpointModelMapper;
+import co.lps.mockora.respository.MockRepository;
+import co.lps.mockora.service.mapper.MockModelMapper;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -26,14 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ServeEndpointServiceImpl implements ServeEndpointService {
 
-  private EndpointRepository endpointRepository;
-  private EndpointModelMapper endpointModelMapper;
+  private MockRepository mockRepository;
+  private MockModelMapper mockModelMapper;
 
   @Autowired
-  public ServeEndpointServiceImpl(EndpointRepository endpointRepository,
-      EndpointModelMapper endpointModelMapper) {
-    this.endpointRepository = endpointRepository;
-    this.endpointModelMapper = endpointModelMapper;
+  public ServeEndpointServiceImpl(MockRepository mockRepository, MockModelMapper mockModelMapper) {
+    this.mockRepository = mockRepository;
+    this.mockModelMapper = mockModelMapper;
 
   }
 
@@ -65,19 +64,18 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
 
   private ResponseDto extractMethodResponse(final String orgId, final String resourceId,
       final HttpMethod methodType) {
-    List<Endpoint> endpointList = endpointRepository.findByOrgIdAndResourceId(orgId, resourceId);
+    List<Mock> mocks = mockRepository.findByOrgIdAndResourceId(orgId, resourceId);
 
     // extract endpoint
-    Optional<EndpointDto> endpoint =
-        endpointList.stream().findFirst().map(endpointModelMapper::mapToDto);
-    if (!endpoint.isPresent()) {
-      String errMsg = String.format("No mock endpoint for %s%s found", orgId, resourceId);
+    Optional<MockDto> mockDto = mocks.stream().findFirst().map(mockModelMapper::mapToDto);
+    if (!mockDto.isPresent()) {
+      String errMsg = String.format("No mock endpoint for %s/%s found", orgId, resourceId);
       log.error(errMsg);
       throw new MockoraException(errMsg, HttpStatus.NOT_FOUND);
     }
 
-    // extract endpoint method
-    Optional<MethodDto> method = endpoint.get().getMethods().stream()
+    // extract mock method
+    Optional<MethodDto> method = mockDto.get().getMethods().stream()
         .filter(m -> m.getMethodType().equals(methodType.name())).findFirst();
     if (!method.isPresent()) {
       String errMsg = "Request Method not supported";

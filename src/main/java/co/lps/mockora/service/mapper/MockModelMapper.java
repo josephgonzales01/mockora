@@ -2,38 +2,36 @@ package co.lps.mockora.service.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import co.lps.mockora.model.dto.MethodDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import co.lps.mockora.model.dao.Endpoint;
 import co.lps.mockora.model.dao.Method;
-import co.lps.mockora.model.dto.EndpointDto;
+import co.lps.mockora.model.dao.Mock;
+import co.lps.mockora.model.dto.MethodDto;
+import co.lps.mockora.model.dto.MockDto;
 
 @Service
-public class EndpointModelMapper {
+public class MockModelMapper {
 
 
   private MethodModelMapper methodModelMapper;
 
   @Autowired
-  public EndpointModelMapper(MethodModelMapper methodModelMapper) {
+  public MockModelMapper(MethodModelMapper methodModelMapper) {
     this.methodModelMapper = methodModelMapper;
   }
 
-  public Endpoint mapToDao(EndpointDto dto) {
+  public Mock mapToDao(MockDto dto) {
 
     List<Method> methods =
         dto.getMethods().stream().map(methodModelMapper::mapToDao).collect(Collectors.toList());
-
-    return new Endpoint(dto.getId(), dto.getResourceId(), dto.getOrgId(), methods);
+    return new Mock(dto.getOrgId(), dto.getResourceId(), methods, dto.getId());
   }
 
-  public EndpointDto mapToDto(Endpoint dao) {
+  public MockDto mapToDto(Mock dao) {
 
     List<MethodDto> methods =
         dao.getMethods().stream().map(methodModelMapper::mapToDto).collect(Collectors.toList());
-    return new EndpointDto(dao.getId(), dao.getResourceId(), dao.getOrgId(), methods);
+    return new MockDto(dao.getOrgId(), dao.getResourceId(), methods, dao.getId());
   }
 
 }
