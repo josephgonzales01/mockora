@@ -14,7 +14,7 @@ import co.lps.mockora.model.dao.Mock;
 @Repository
 public interface MockRepository extends MongoRepository<Mock, String>, MockDynamicQuery {
 
-  List<Mock> findByOrgIdAndResourceId(String orgId, String resourceId);
+  Mock findByOrgIdAndResourceId(String orgId, String resourceId);
 
   List<Mock> findByOrgId(String orgId);
 

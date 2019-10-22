@@ -1,11 +1,11 @@
 package co.lps.mockora.service;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import co.lps.mockora.constants.HttpMethod;
+import co.lps.mockora.error.ErrorMsg;
 import co.lps.mockora.error.MockoraException;
 import co.lps.mockora.model.dao.Mock;
 import co.lps.mockora.model.dto.MethodDto;
@@ -64,21 +64,21 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
 
   private ResponseDto extractMethodResponse(final String orgId, final String resourceId,
       final HttpMethod methodType) {
-    List<Mock> mocks = mockRepository.findByOrgIdAndResourceId(orgId, resourceId);
+    Mock mocks = mockRepository.findByOrgIdAndResourceId(orgId, resourceId);
 
-    // extract endpoint
-    Optional<MockDto> mockDto = mocks.stream().findFirst().map(mockModelMapper::mapToDto);
-    if (!mockDto.isPresent()) {
-      String errMsg = String.format("No mock endpoint for %s/%s found", orgId, resourceId);
+    if (mocks != null) {
+      String errMsg = String.format(ErrorMsg.LOG_MOCK_NOT_FOUND, orgId, resourceId);
       log.error(errMsg);
       throw new MockoraException(errMsg, HttpStatus.NOT_FOUND);
     }
+    // extract mock
+    MockDto mockDto = mockModelMapper.mapToDto(mocks);
 
     // extract mock method
-    Optional<MethodDto> method = mockDto.get().getMethods().stream()
+    Optional<MethodDto> method = mockDto.getMethods().stream()
         .filter(m -> m.getMethodType().equals(methodType.name())).findFirst();
     if (!method.isPresent()) {
-      String errMsg = "Request Method not supported";
+      String errMsg = String.format(ErrorMsg.LOG_REQUEST_METHOD_NOT_FOUND, methodType.name());
       log.error(errMsg);
       throw new MockoraException(errMsg, HttpStatus.METHOD_NOT_ALLOWED);
     }

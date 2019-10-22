@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import co.lps.mockora.constants.ApplicationURL;
 import co.lps.mockora.constants.SwagMe;
@@ -64,6 +66,22 @@ public class MockEndpointController {
 
     return ResponseEntity.created(new URI(createdUri))
         .body(new CommonResponseDto(201, "Successfully Created endpoint", createdUri, null));
+  }
+
+  @DeleteMapping(value = "/{orgId}/{resourceId}/**", produces = MediaType.APPLICATION_JSON_VALUE)
+  @ApiOperation(value = "Delete a Mock API operation")
+  public ResponseEntity<CommonResponseDto> deleteMock(HttpServletRequest request,
+      @PathVariable String orgId, @PathVariable String resourceId,
+      @RequestParam(required = false) List<String> methods) throws URISyntaxException {
+
+    log.debug("[MOCK:DELETE] for url {}/{}", orgId, resourceId);
+    mockEndpointService.delete(orgId.toLowerCase(), resourceId.toLowerCase(), methods);
+
+    String url = String.format("%s%s/%s/%s", urlUtilityService.getHostAndPort(),
+        ApplicationURL.MOCK_URL, orgId, resourceId);
+
+    return ResponseEntity
+        .ok(new CommonResponseDto(200, "Successfully Deleted endpoint", url.toLowerCase(), null));
   }
 
 
