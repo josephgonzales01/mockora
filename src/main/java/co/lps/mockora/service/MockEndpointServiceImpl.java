@@ -37,6 +37,11 @@ public class MockEndpointServiceImpl implements MockEndpointService {
 
   @Override
   public void save(MockDto dto) {
+    // extract and validate methods
+    List<String> methods = dto.getMethods().stream().map(m -> m.getMethodType().toUpperCase())
+        .collect(Collectors.toList());
+    validateMethods(methods);
+    
     Mock mock = mockModelMapper.mapToDao(dto);
     mockRepository.save(mock);
   }
@@ -69,8 +74,8 @@ public class MockEndpointServiceImpl implements MockEndpointService {
       mockRepository.delete(mock);
       return;
     }
-    mockRepository.save(mock);
 
+    mockRepository.save(mock);
 
   }
 

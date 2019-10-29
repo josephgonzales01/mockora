@@ -20,7 +20,7 @@ public class ErrorHandlingController {
   public ResponseEntity<CommonResponseDto> handleError(Exception ex, WebRequest request) {
     List<ErrorDto> errors = new ArrayList<ErrorDto>();
 
-    // Resource not found, method not supported errors
+    // Resource not found, method not supported and bad request errors
     if (ex instanceof MockoraException) {
      
       MockoraException mex = (MockoraException) ex;

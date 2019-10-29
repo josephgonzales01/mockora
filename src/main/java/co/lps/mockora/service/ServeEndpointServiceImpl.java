@@ -64,15 +64,15 @@ public class ServeEndpointServiceImpl implements ServeEndpointService {
 
   private ResponseDto extractMethodResponse(final String orgId, final String resourceId,
       final HttpMethod methodType) {
-    Mock mocks = mockRepository.findByOrgIdAndResourceId(orgId, resourceId);
+    Mock mock = mockRepository.findByOrgIdAndResourceId(orgId, resourceId);
 
-    if (mocks != null) {
+    if (null == mock) {
       String errMsg = String.format(ErrorMsg.LOG_MOCK_NOT_FOUND, orgId, resourceId);
       log.error(errMsg);
       throw new MockoraException(errMsg, HttpStatus.NOT_FOUND);
     }
     // extract mock
-    MockDto mockDto = mockModelMapper.mapToDto(mocks);
+    MockDto mockDto = mockModelMapper.mapToDto(mock);
 
     // extract mock method
     Optional<MethodDto> method = mockDto.getMethods().stream()
